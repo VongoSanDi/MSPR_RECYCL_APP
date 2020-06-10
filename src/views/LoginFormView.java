@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import mock.Mock_Login;
 
-public class LoginFormView(Stage stage1) {
+public class LoginFormView {
     public GridPane LoginForm() {
         // Création d'une instace du conteneur gridPane
         GridPane gridPane = new GridPane();
@@ -83,7 +83,7 @@ public class LoginFormView(Stage stage1) {
         GridPane.setHalignment(button_seConnecter, HPos.CENTER);
         GridPane.setMargin(button_seConnecter, new Insets(20, 0, 20, 0));
 
-        button_seConnecter.setOnAction(new EventHandler<ActionEvent>() {
+        button_seConnecter.setOnAction(new EventHandler<>() {
             Mock_Login mock_login = new Mock_Login();
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -105,13 +105,11 @@ public class LoginFormView(Stage stage1) {
                     Scene sceneBis = new Scene(affichageDeux.PageDeux(), 800, 500);
                     Stage stageBis = new Stage();
                     stageBis.setTitle("Affichage par date");
-                    affichageDeux.UIComponents(gridPane1);
+                    //affichageDeux.UIComponents();
                     stageBis.setScene(sceneBis);
                     stageBis.show();
-
                 } else {
                     showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Erreur dans le formulaire", "L'identifiant ou le mot de passe est incorrect");
-                    return;
                 }
             }
         });
