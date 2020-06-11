@@ -14,12 +14,27 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import mock.Mock_Login;
+import mock.Mock;
 
 public class LoginFormView {
     public GridPane LoginForm() {
+
         // Création d'une instace du conteneur gridPane
         GridPane gridPane = new GridPane();
+
+        // Création du stage
+        Stage stage = new Stage();
+        stage.setTitle("Formulaire de connexion");
+
+        // On insère dans les composants le gridPane qui est le conteur des composants
+        UIComponents(gridPane);
+
+        // Création de la scène
+        Scene scene = new Scene(gridPane, 500, 300);
+
+        // Ajout des composants graphiques à la scene
+        stage.setScene(scene);
+        stage.show();
 
         // Centrer le conteneur sur l'écran, verticalement et horizontalement
         gridPane.setAlignment(Pos.CENTER);
@@ -84,7 +99,7 @@ public class LoginFormView {
         GridPane.setMargin(button_seConnecter, new Insets(20, 0, 20, 0));
 
         button_seConnecter.setOnAction(new EventHandler<>() {
-            Mock_Login mock_login = new Mock_Login();
+            Mock mock = new Mock();
             @Override
             public void handle(ActionEvent actionEvent) {
 
@@ -98,16 +113,9 @@ public class LoginFormView {
                     return;
                 }
                 // Login
-                if(textField_username.getText().equals(mock_login.identifiant) && passwordField_password.getText().equals(mock_login.motDePasse)) {
+                if(textField_username.getText().equals(mock.identifiant) && passwordField_password.getText().equals(mock.motDePasse)) {
                     AffichageSelonDate affichageDeux = new AffichageSelonDate();
-                    GridPane gridPane1 = affichageDeux.PageDeux();
-                    affichageDeux.UIComponents(gridPane1);
-                    Scene sceneBis = new Scene(affichageDeux.PageDeux(), 800, 500);
-                    Stage stageBis = new Stage();
-                    stageBis.setTitle("Affichage par date");
-                    //affichageDeux.UIComponents();
-                    stageBis.setScene(sceneBis);
-                    stageBis.show();
+                    affichageDeux.PageDeux();
                 } else {
                     showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Erreur dans le formulaire", "L'identifiant ou le mot de passe est incorrect");
                 }
